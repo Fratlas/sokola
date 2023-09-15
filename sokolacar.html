@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sokola Car</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('pexels-photo-6873181.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            font-size: 100px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(153, 153, 153, 0.37);
+            border-radius: 50px;
+            box-shadow: 0 2px 5px rgba(0,0,0,.3);
+        }
+        
+        form {
+            font-size: 20px;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: #2c3e50;
+        }
+        .form-control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-color: #2c3e50;
+        }
+        .form-group {
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            background-color: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 20px;
+        }
+
+                h1 {
+            font-size: 100px;
+            margin-top: 50px;
+            color: #fff; /* Texte blanc */
+        }
+        form label {
+            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+        
+        form input {
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            border-color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        form button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 50px;
+        }
+
+        .notification {
+            display: none;
+            margin-top: 30px;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .notification.show {
+            display: block;
+        }
+    </style>
+ <div class="header">
+    <h1>Sokola Car</h1>
+
+</div>
+    <div class="container">
+    <form>
+    <div class="form-group">
+    <label for="nom">Nom complet :</label>
+    <input type="text" class="form-control" id="nom" placeholder="Entrez votre nom
+    complet" required>
+    </div>
+    <div class="form-group">
+    <label for="adresse">Adresse physique :</label>
+    <textarea class="form-control" id="adresse" rows="3" required></textarea>
+    </div>
+    <div class="form-group">
+    <label for="telephone">Numéro de téléphone :</label>
+    <input type="tel" class="form-control" id="telephone" placeholder="Entrez votre
+    numéro de téléphone" required>
+    </div>
+    <div class="form-group">
+    <label for="whatsapp">Numéro WhatsApp :</label>
+    <input type="tel" class="form-control" id="whatsapp" placeholder="Entrez le numéro
+    WhatsApp" required>
+    </div>
+    <div class="form-group">
+    <label for="vehicule">Type de véhicule :</label>
+    <select class="form-control" id="vehicule" required>
+    <option>Sélectionnez un type de véhicule</option>
+    <option>Voiture</option>
+    <option>Moto</option>
+    <option>Camion</option>
+    </select>
+    </div>
+    <div class="form-group">
+    <label for="photo">Photo du véhicule :</label>
+    <input type="file" id="photo" accept="image/*" capture required>
+    </div>
+    <div class="form-group">
+    <label for="message">Message :</label>
+    <textarea class="form-control" id="message" rows="5"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" onclick="sendWhatsAppMessage()">Envoyer</button>
+    </form>
+    
+</div>
+
+<!-- Script pour créer l'URL WhatsApp -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Empêcher le formulaire de se soumettre normalement
+
+            const nom = document.getElementById("nom").value;
+            const adresse = document.getElementById("adresse").value;
+            const telephone = document.getElementById("telephone").value;
+            const vehicule = document.getElementById("vehicule").value;
+            const photo = document.getElementById("photo").files[0].name;
+            const message = document.getElementById("message").value;
+
+            // Numéro WhatsApp de destination
+            const numeroWhatsApp = "+243818892437";
+
+            // Construire le lien WhatsApp avec les informations
+            const lienWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(`Nom : ${nom}%0AAdresse : ${adresse}%0ATéléphone : ${telephone}%0AVéhicule : ${vehicule}%0APhoto : ${photo}%0AMessage : ${message}`)}`;
+
+            // Rediriger l'utilisateur vers l'URL WhatsApp
+            window.location.href = lienWhatsApp;
+        });
+    });
+</script>
